@@ -1,0 +1,8 @@
+<?php
+
+class Math extends CI_Model{
+	
+
+// <td id="A2"><button class="circle_blank" onclick="this.className='circle_red';"> </button></td>
+}
+?>

@@ -1,0 +1,69 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+class User_model extends CI_Model {
+ public function __construct()
+ {
+  parent::__construct();
+ }
+ public function add_user()
+ {
+	$data2=array(
+	'epastas'=>$this->input->post('epastas'),	
+	'vieta'=>$this->input->post('vietosid')
+	);
+	$data=array(
+    'vardas'=>$this->input->post('vardas111'),
+    'epastas'=>$this->input->post('epastas'),
+    'slaptazodis'=>md5($this->input->post('slaptazodis')),
+    'miestas'=>$this->input->post('miestas'),
+    'adresas'=>$this->input->post('adresas')
+  );
+  $this->db->insert('informacija',$data);
+  $this->db->insert('rezervacijos',$data2);
+ }
+ public function remove_user()
+ {
+ 	$email=$this->input->post('ptrinti');
+ 	$this->db->delete('informacija',array('epastas'=> $email));
+ 	$this->db->delete('rezervacijos',array('epastas'=>$email));
+ }
+ public function create_table()
+ {
+   $fields = array(
+                        'vardas' => array(
+                                                'type' =>'VARCHAR',
+                                                'constraint' => '100',
+                                          ),
+                        'adresas' => array(
+                                                 'type' => 'VARCHAR',
+                                                 'constraint' => '100',
+                                          ),
+                        'slaptazodis' => array(
+                                                 'type' =>'VARCHAR',
+                                                 'constraint' => '100',
+                                          ),
+                        'epastas' => array(
+                                                 'type' =>'VARCHAR',
+                                                 'constraint' => '100',
+                                          ),
+                        'miestas' => array(
+                                                 'type' =>'VARCHAR',
+                                                 'constraint' => '100',
+                                          ),
+                	);
+	$fields2 = array(
+                        'epastas' => array(
+                                                'type' =>'VARCHAR',
+                                                'constraint' => '100',
+                                          ),
+                        'vieta' => array(
+                                                 'type' => 'VARCHAR',
+                                                 'constraint' => '100',
+														),
+						);
+	$this->dbforge->create_table('informacija', TRUE);
+	$this->dbforge->add_field($fields);				
+	$this->dbforge->create_table('rezervacijos', TRUE);
+	$this->dbforge->add_field($fields2);
+ }
+ }
+?>

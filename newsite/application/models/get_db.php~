@@ -1,0 +1,12 @@
+<?php
+class get_db extends CI_Model{
+	function getAll(){
+		$this->db->query("SELECT * FROM informacija");
+		
+		return $query->result();
+	}
+	function insert1($data){
+		$this->db->insert("informacija", $data);	
+	}
+}
+?>

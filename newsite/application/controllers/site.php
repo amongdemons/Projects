@@ -1,0 +1,43 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class site extends CI_Controller {
+	public function index(){
+		$this -> home();
+		//$this->user_model->create_table(); 
+		
+	}
+	public function home(){
+		$data["title"]= "Registracija";
+		$this->load->view("home_view", $data);	
+	}
+public function __construct()
+ {
+  parent::__construct();
+  $this->load->model('user_model');
+ }
+public function registration()
+ {
+  $this->load->library('form_validation');
+  // field name, error message, validation rules
+  $this->form_validation->set_rules('vardas111', 'User Name', 'trim|required|min_length[4]|xss_clean');
+  $this->form_validation->set_rules('epastas', 'Your Email', 'trim|required|valid_email');
+  $this->form_validation->set_rules('slaptazodis', 'Password', 'trim|required|min_length[4]|max_length[30]');
+  $this->form_validation->set_rules('pslaptazodis', 'Password Confirmation', 'trim|required|matches[slaptazodis]');
+
+  if($this->form_validation->run() == FALSE)
+  {
+  //$message = "Patikrinkite ar teisingai ivesta informacija!";
+  //echo "<script type='text/javascript'>alert('$message');</script>";
+  $this->user_model->add_user();
+  }
+  else
+  {
+   $this->user_model->add_user();
+  }
+ }
+ public function remove_user(){
+	$this->user_model->remove_user(); 
+ }
+}
+?>
+
