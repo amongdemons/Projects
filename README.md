@@ -8,5 +8,5 @@
 
   *Pagrindinis failas views->home_view.php
   *Modelis models->user_model.php
-  *Kontrolierius controllers-site.php
+  *Kontrolierius controllers->site.php
  
